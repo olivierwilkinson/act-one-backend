@@ -1,14 +1,22 @@
 import { Router } from 'express';
+import { PrismaClient } from '@prisma/client';
 
 import { version } from '../../package.json';
 import ApplicationError from '../errors/ApplicationError';
 
-export default () => {
+export default (client: PrismaClient) => {
   const router = Router();
 
   router.get('/', (_, res) => res.json({ version }));
   router.get('/status', (_, res) => res.sendStatus(200));
-  router.get('/ready', (_, res) => res.sendStatus(200));
+  router.get('/ready', async (_, res, next) => {
+    try {
+      await client.user.count();
+      res.sendStatus(200);
+    } catch (e) {
+      next(new ApplicationError('Unable to access db'));
+    }
+  });
   router.get('/live', (_, res, next) => {
     if (process.env.NODE_ENV !== 'production') {
       return next(
