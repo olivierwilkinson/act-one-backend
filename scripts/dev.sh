@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-cleanup() {
-  docker-compose down
-  trap '' EXIT INT TERM
-  exit $err
-}
+source 'scripts/helpers.sh'
 
-trap cleanup SIGINT EXIT
-
-docker-compose up -d --force-recreate
+trap stop_services SIGINT EXIT
+start_services
 
 NODE_ENV=development nodemon
