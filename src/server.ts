@@ -8,11 +8,12 @@ if (result.error) {
 }
 
 import app from './app';
+import config from './config';
 
-http.createServer(app).listen(app.get('port'), () => {
+http.createServer(app).listen(config.port, () => {
   console.log(
     '\x1b[36m%s\x1b[0m', // eslint-disable-line
-    `🌏 Express server started at http://localhost:${app.get('port')}`
+    `🌏 Express server started at http://localhost:${config.port}`
   );
 });
 
