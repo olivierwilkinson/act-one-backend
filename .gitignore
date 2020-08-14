@@ -127,3 +127,6 @@ dist
 data
 node_modules
 coverage
+
+# VSCode
+.vscode
