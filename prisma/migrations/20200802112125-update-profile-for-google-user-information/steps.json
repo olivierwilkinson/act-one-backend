@@ -1,0 +1,51 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "displayName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "displayName"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "displayName"
+        },
+        "directive": "default"
+      },
+      "argument": "value",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "picture",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "googleId",
+      "type": "String",
+      "arity": "Optional"
+    }
+  ]
+}
