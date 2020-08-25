@@ -1,6 +1,6 @@
 {
   "name": "act-one-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ActOne express backend",
   "author": "Olivier Wilkinson",
   "main": "dist/index.js",
