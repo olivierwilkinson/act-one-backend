@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from 'nexus-plugin-prisma/client';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 
 import BadRequest from '../errors/BadRequest';

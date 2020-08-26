@@ -1,16 +1,30 @@
+import { use, server, settings } from 'nexus';
+import { prisma } from 'nexus-plugin-prisma';
+import { PrismaClient } from 'nexus-plugin-prisma/client';
 import bodyParser from 'body-parser';
-import express from 'express';
-import * as Sentry from '@sentry/node';
-import strongErrorHandler from 'strong-error-handler';
 import session from 'express-session';
-import { PrismaClient } from '@prisma/client';
 import passport from 'passport';
+import strongErrorHandler from 'strong-error-handler';
+import * as Sentry from '@sentry/node';
+import dotenv from 'dotenv';
 
 import routes from './routes';
 import { createGoogleStrategy } from './passport';
 
-const app = express();
+const result = dotenv.config();
+if (result.error) {
+  dotenv.config({ path: '.env.default' });
+}
+
 const client = new PrismaClient();
+use(prisma({ client: { instance: client } }));
+const { express: app } = server;
+
+settings.change({
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8000,
+  },
+});
 
 Sentry.init({ dsn: process.env.SENTRY_DSN || '' });
 

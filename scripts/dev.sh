@@ -6,4 +6,4 @@ source 'scripts/helpers.sh'
 trap stop_services SIGINT EXIT
 start_services
 
-NODE_ENV=development nodemon
+NODE_ENV=development npx nexus dev
