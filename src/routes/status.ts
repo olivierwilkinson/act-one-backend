@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import { Router } from 'express';
 import { PrismaClient } from 'nexus-plugin-prisma/client';
 import ApplicationError from '../errors/ApplicationError';
