@@ -15,6 +15,7 @@ export default (client: PrismaClient) => {
       await client.user.count();
       res.sendStatus(200);
     } catch (e) {
+      console.error(e);
       next(new ApplicationError('Unable to access db'));
     }
   });
