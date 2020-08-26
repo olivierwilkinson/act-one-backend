@@ -1,35 +1,36 @@
 {
   "name": "act-one-backend",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "ActOne express backend",
   "author": "Olivier Wilkinson",
   "main": "dist/index.js",
   "scripts": {
     "eslint": "eslint src/server.ts",
     "postinstall": "chmod +x ./scripts/dev.sh",
-    "build": "tsc",
+    "build": "nexus build",
     "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
     "dev": "./scripts/dev.sh",
-    "start": "node dist/src/server.js",
+    "start": "node dist",
     "test": "jest",
     "fix-lint": "prettier --write src && ./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
     "migrate": "./scripts/migrate.sh",
-    "migrate:local": "./scripts/migrate-local.sh"
+    "migrate:local": "./scripts/migrate-local.sh",
+    "generate": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^2.3.0",
     "@sentry/node": "^5.20.1",
     "body-parser": "1.19.0",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-session": "^1.17.1",
+    "nexus": "^0.27.0-next.4",
+    "nexus-plugin-prisma": "^0.17.0",
     "nodemon": "2.0.4",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "strong-error-handler": "^3.5.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.3.0",
     "@types/dotenv": "8.2.0",
     "@types/express": "4.17.6",
     "@types/express-session": "^1.17.0",

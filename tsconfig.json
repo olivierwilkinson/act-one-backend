@@ -7,11 +7,10 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
+    "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "node_modules/*"
-      ]
+      "*": ["node_modules/*"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
@@ -20,9 +19,10 @@
     "noUnusedLocals": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "noEmit": true,
+    "typeRoots": ["node_modules/@types","types"],
+    "plugins": [{ "name": "nexus/typescript-language-service" }]
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": [".", "src/**/*", "types.d.ts"]
 }
