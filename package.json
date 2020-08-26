@@ -13,7 +13,8 @@
     "start": "node dist/src/server.js",
     "test": "jest",
     "fix-lint": "prettier --write src && ./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
-    "migrate": "./scripts/migrate.sh"
+    "migrate": "./scripts/migrate.sh",
+    "migrate:local": "./scripts/migrate-local.sh"
   },
   "dependencies": {
     "@prisma/client": "^2.3.0",
