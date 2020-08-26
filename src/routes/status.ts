@@ -32,7 +32,13 @@ export default (client: PrismaClient) => {
     }
 
     const vars = Object.getOwnPropertyNames(process.env);
-    const expected = ['SENTRY_DSN'];
+    const expected = [
+      'SENTRY_DSN',
+      'SESSION_SECRET',
+      'GOOGLE_CLIENT_ID',
+      'GOOGLE_CLIENT_SECRET',
+      'DATABASE_URL',
+    ];
 
     const missing = expected.filter((envVar) => !vars.includes(envVar));
     if (missing.length !== 0) {
