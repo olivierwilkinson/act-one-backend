@@ -49,6 +49,11 @@ passport.use(createGoogleStrategy(client));
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
+express.use(({ user }, _, next) => {
+  nexus.schema.addToContext(() => ({ user }));
+  next();
+});
+
 express.use(routes(client));
 
 express.use(Sentry.Handlers.errorHandler());
