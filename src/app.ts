@@ -1,4 +1,4 @@
-import { use, server, settings } from 'nexus';
+import nexus from 'nexus';
 import { prisma } from 'nexus-plugin-prisma';
 import { PrismaClient } from 'nexus-plugin-prisma/client';
 import bodyParser from 'body-parser';
@@ -17,10 +17,10 @@ if (result.error) {
 }
 
 const client = new PrismaClient();
-use(prisma({ client: { instance: client } }));
-const { express: app } = server;
+nexus.use(prisma({ client: { instance: client } }));
+const { express } = nexus.server;
 
-settings.change({
+nexus.settings.change({
   server: {
     port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8000,
   },
@@ -28,7 +28,7 @@ settings.change({
 
 Sentry.init({ dsn: process.env.SENTRY_DSN || '' });
 
-app.use(
+express.use(
   session({
     secret: process.env.SESSION_SECRET || '123',
     saveUninitialized: true,
@@ -40,22 +40,22 @@ app.use(
   })
 );
 
-app.use(Sentry.Handlers.requestHandler());
-app.use(bodyParser.json());
+express.use(Sentry.Handlers.requestHandler());
+express.use(bodyParser.json());
 
-app.use(passport.initialize());
-app.use(passport.session());
+express.use(passport.initialize());
+express.use(passport.session());
 passport.use(createGoogleStrategy(client));
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-app.use(routes(client));
+express.use(routes(client));
 
-app.use(Sentry.Handlers.errorHandler());
-app.use(
+express.use(Sentry.Handlers.errorHandler());
+express.use(
   strongErrorHandler({
     safeFields: ['message', 'code', 'details'],
   })
 );
 
-export default app;
+export default express;
