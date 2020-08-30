@@ -14,7 +14,6 @@
     "test": "jest",
     "fix-lint": "prettier --write src && ./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
     "migrate": "./scripts/migrate.sh",
-    "migrate:local": "./scripts/migrate-local.sh",
     "generate": "prisma generate"
   },
   "dependencies": {
