@@ -1,0 +1,19 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Scene",
+      "field": "actNum",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Scene",
+      "field": "sceneNum",
+      "type": "Int",
+      "arity": "Required"
+    }
+  ]
+}

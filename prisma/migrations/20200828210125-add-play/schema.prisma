@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -26,23 +26,21 @@ model Play {
   image            String
   imageLicenseUrl  String
   imageLicenseCode String
-  scenes           Scene[] @relation
+  scenes           Scene[]
 }
 
 model Scene {
-  id       Int    @id @default(autoincrement())
-  actNum   Int
-  sceneNum Int
-  lines    Line[] @relation
-  play     Play?  @relation(fields: [playId], references: [id])
-  playId   Int?
+  id     Int    @id @default(autoincrement())
+  lines  Line[]
+  Play   Play?  @relation(fields: [playId], references: [id])
+  playId Int?
 }
 
 model Line {
   id       Int       @id @default(autoincrement())
   player   String
-  lineRows LineRow[] @relation
-  scene    Scene?    @relation(fields: [sceneId], references: [id])
+  lineRows LineRow[]
+  Scene    Scene?    @relation(fields: [sceneId], references: [id])
   sceneId  Int?
 }
 
@@ -50,6 +48,6 @@ model LineRow {
   id     Int    @id @default(autoincrement())
   number Int?
   text   String
-  line   Line?  @relation(fields: [lineId], references: [id])
+  Line   Line?  @relation(fields: [lineId], references: [id])
   lineId Int?
 }

@@ -14,7 +14,6 @@
     "test": "jest",
     "fix-lint": "prettier --write src && ./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
     "migrate": "./scripts/migrate.sh",
-    "migrate:local": "./scripts/migrate-local.sh",
     "generate": "prisma generate"
   },
   "dependencies": {
@@ -23,7 +22,8 @@
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-session": "^1.17.1",
-    "nexus": "^0.27.0-next.4",
+    "http-proxy-middleware": "^1.0.5",
+    "nexus": "^0.26.1",
     "nexus-plugin-prisma": "^0.17.0",
     "nodemon": "2.0.4",
     "passport": "^0.4.1",

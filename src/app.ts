@@ -41,7 +41,8 @@ express.use(
 );
 
 express.use(Sentry.Handlers.requestHandler());
-express.use(bodyParser.json());
+express.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+express.use(bodyParser.json({ limit: '50mb' }));
 
 express.use(passport.initialize());
 express.use(passport.session());
