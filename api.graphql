@@ -14,8 +14,87 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 """
 scalar Json
 
+type Line {
+  id: Int!
+  lineRows(after: LineRowWhereUniqueInput, before: LineRowWhereUniqueInput, first: Int, last: Int): [LineRow!]!
+  player: String!
+  scene: Scene
+  sceneId: Int
+}
+
+input LineData {
+  lineRows: [LineRowData!]!
+  player: String!
+}
+
+type LineRow {
+  id: Int!
+  line: Line
+  lineId: Int
+  number: Int
+  text: String!
+}
+
+input LineRowData {
+  number: Int
+  text: String!
+}
+
+input LineRowWhereUniqueInput {
+  id: Int
+}
+
+input LineWhereUniqueInput {
+  id: Int
+}
+
+type Mutation {
+  createPlay(play: PlayData!): Play
+  deletePlay(id: Int!): Play
+  updateName: User
+}
+
+type Play {
+  description: String!
+  id: Int!
+  image: String!
+  imageLicenseCode: String!
+  imageLicenseUrl: String!
+  scenes(after: SceneWhereUniqueInput, before: SceneWhereUniqueInput, first: Int, last: Int): [Scene!]!
+  title: String!
+}
+
+input PlayData {
+  description: String!
+  image: String!
+  imageLicenseCode: String!
+  imageLicenseUrl: String!
+  scenes: [SceneData!]!
+  title: String!
+}
+
 type Query {
+  getPlays: [Play!]
   user: User
+}
+
+type Scene {
+  actNum: Int!
+  id: Int!
+  lines(after: LineWhereUniqueInput, before: LineWhereUniqueInput, first: Int, last: Int): [Line!]!
+  play: Play
+  playId: Int
+  sceneNum: Int!
+}
+
+input SceneData {
+  actNum: Int!
+  lines: [LineData!]!
+  sceneNum: Int!
+}
+
+input SceneWhereUniqueInput {
+  id: Int
 }
 
 type User {

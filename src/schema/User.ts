@@ -12,7 +12,8 @@ schema.objectType({
   },
 });
 
-schema.queryType({
+schema.extendType({
+  type: 'Query',
   definition(t) {
     t.field('user', {
       type: 'User',

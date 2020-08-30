@@ -1,0 +1,38 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Play",
+          "field": "scenes"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Scene",
+          "field": "lines"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Line",
+          "field": "lineRows"
+        },
+        "directive": "relation"
+      }
+    }
+  ]
+}
