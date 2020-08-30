@@ -2,3 +2,7 @@
 
 20200801163758-init
 20200802112125-update-profile-for-google-user-information
+20200828210125-add-play
+20200828213038-add-act-num-and-scene-num-to-scene
+20200828221222-make-relations-lowercase
+20200829133134-correct-play-relations
