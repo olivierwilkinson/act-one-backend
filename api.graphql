@@ -51,7 +51,6 @@ input LineWhereUniqueInput {
 type Mutation {
   createPlay(play: PlayData!): Play
   deletePlay(id: Int!): Play
-  updateName: User
 }
 
 type Play {
