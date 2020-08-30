@@ -10,11 +10,13 @@ npm run migrate:local
 
 ### Production
 
+Update CloudSQL to allow external connections
+
 Expose production db locally
 ```
-GOOGLE_APPLICATION_CREDENTIALS=/Users/olivier/Developer/GoogleCloud/actone_service_account.json \
+GOOGLE_APPLICATION_CREDENTIALS=/Users/olivier/Developer/GoogleCloud/{actone_service_account.json} \
     ~/Developer/GoogleCloud/cloud_sql_proxy \
-    -instances=actone:europe-west2:sql-instance-name=tcp:3305
+    -instances=actone:europe-west2:{sql-instance-name}=tcp:3305
 ```
 
 Run migrate script with DATABASE_URL updated for production sql user creds
