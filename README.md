@@ -19,8 +19,15 @@ GOOGLE_APPLICATION_CREDENTIALS=/Users/olivier/Developer/GoogleCloud/{actone_serv
     -instances=actone:europe-west2:{sql-instance-name}=tcp:3305
 ```
 
+Start server with migrations and point to production db
+
+```
+DATABASE_URL=mysql://{user}:{pass}@localhost:3305/actone \
+    npm run dev
+```
+
 Run migrate script with DATABASE_URL updated for production sql user creds
 ```
-DATABASE_URL=mysql://user:pass@localhost:3305/actone \
+DATABASE_URL=mysql://{user}:{pass}@localhost:3305/actone \
     npm run migrate
 ```
