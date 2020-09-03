@@ -2,6 +2,7 @@ import { schema } from 'nexus';
 import { intArg } from 'nexus/components/schema';
 
 import createPlay from '../helpers/createPlay';
+import userIsAdmin from '../helpers/userIsAdmin';
 
 schema.objectType({
   name: 'Play',
@@ -39,11 +40,12 @@ schema.extendType({
           required: true,
         }),
       },
-      async resolve(_, { play }, { db }) {
-        return createPlay({
-          play,
-          db,
-        });
+      async resolve(_, { play }, { db, user }) {
+        if (!userIsAdmin(user)) {
+          throw new Error('Access Denied');
+        }
+
+        return createPlay({ play, db });
       },
     });
 
@@ -52,8 +54,12 @@ schema.extendType({
       args: {
         id: intArg({ required: true }),
       },
-      resolve(_, { id }, ctx) {
-        return ctx.db.play.delete({
+      resolve(_, { id }, { db, user }) {
+        if (!userIsAdmin(user)) {
+          throw new Error('Access Denied');
+        }
+
+        return db.play.delete({
           where: { id },
         });
       },
