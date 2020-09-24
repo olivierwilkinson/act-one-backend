@@ -11,3 +11,10 @@ schema.objectType({
     t.model.lines();
   },
 });
+
+schema.extendType({
+  type: 'Query',
+  definition(t) {
+    t.crud.scene();
+  },
+});
