@@ -17,6 +17,7 @@
     "generate": "prisma generate"
   },
   "dependencies": {
+    "@quixo3/prisma-session-store": "^1.1.0",
     "@sentry/node": "^5.20.1",
     "body-parser": "1.19.0",
     "dotenv": "8.2.0",
