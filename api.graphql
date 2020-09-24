@@ -79,6 +79,7 @@ input PlayWhereUniqueInput {
 type Query {
   getPlays: [Play!]
   play(where: PlayWhereUniqueInput!): Play
+  scene(where: SceneWhereUniqueInput!): Scene
   user: User
 }
 
