@@ -72,8 +72,13 @@ input PlayData {
   title: String!
 }
 
+input PlayWhereUniqueInput {
+  id: Int
+}
+
 type Query {
   getPlays: [Play!]
+  play(where: PlayWhereUniqueInput!): Play
   user: User
 }
 

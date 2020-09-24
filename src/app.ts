@@ -17,7 +17,7 @@ if (result.error) {
 }
 
 const client = new PrismaClient();
-nexus.use(prisma({ client: { instance: client } }));
+nexus.use(prisma({ client: { instance: client }, features: { crud: true } }));
 const { express } = nexus.server;
 
 nexus.settings.change({
