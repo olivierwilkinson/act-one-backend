@@ -59,6 +59,7 @@ type Play {
   image: String!
   imageLicenseCode: String!
   imageLicenseUrl: String!
+  publishedDate: DateTime!
   scenes(after: SceneWhereUniqueInput, before: SceneWhereUniqueInput, first: Int, last: Int): [Scene!]!
   title: String!
 }
@@ -77,8 +78,8 @@ input PlayWhereUniqueInput {
 }
 
 type Query {
-  getPlays: [Play!]
   play(where: PlayWhereUniqueInput!): Play
+  plays(after: PlayWhereUniqueInput, before: PlayWhereUniqueInput, first: Int, last: Int): [Play!]!
   scene(where: SceneWhereUniqueInput!): Scene
   user: User
 }

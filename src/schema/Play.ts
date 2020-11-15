@@ -14,6 +14,7 @@ schema.objectType({
     t.model.imageLicenseCode();
     t.model.imageLicenseUrl();
     t.model.scenes();
+    t.model.publishedDate();
   },
 });
 
@@ -21,12 +22,7 @@ schema.extendType({
   type: 'Query',
   definition(t) {
     t.crud.play();
-    t.list.field('getPlays', {
-      type: 'Play',
-      async resolve(_, __, ctx) {
-        return ctx.db.play.findMany();
-      },
-    });
+    t.crud.plays();
   },
 });
 
