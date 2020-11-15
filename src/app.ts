@@ -7,6 +7,7 @@ import passport from 'passport';
 import strongErrorHandler from 'strong-error-handler';
 import * as Sentry from '@sentry/node';
 import dotenv from 'dotenv';
+import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 
 import routes from './routes';
 import { createGoogleStrategy } from './passport';
@@ -37,6 +38,10 @@ express.use(
       secure: process.env.NODE_ENV === 'production',
     },
     proxy: true,
+    store: new PrismaSessionStore(client, {
+      checkPeriod: 2 * 60 * 1000,
+      dbRecordIdIsSessionId: true,
+    }),
   })
 );
 
