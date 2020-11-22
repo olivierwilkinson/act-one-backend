@@ -1,11 +1,10 @@
-import { PrismaClient } from 'nexus-plugin-prisma/client';
-import { FieldResolver } from 'nexus/components/schema';
+import { PrismaClient } from '@prisma/client';
 
 export default async function createPlay({
   play: { scenes, ...playData },
   db,
 }: {
-  play: Parameters<FieldResolver<'Mutation', 'createPlay'>>[1]['play'];
+  play: any;
   db: PrismaClient;
 }) {
   const play = await db.play.create({
@@ -13,7 +12,7 @@ export default async function createPlay({
   });
 
   await Promise.all(
-    (scenes || []).map(async ({ lines, ...sceneData }) => {
+    (scenes || []).map(async ({ lines, ...sceneData }: any) => {
       const scene = await db.scene.create({
         data: {
           ...sceneData,
@@ -26,7 +25,7 @@ export default async function createPlay({
       });
 
       return Promise.all(
-        lines.map(async ({ lineRows, ...lineData }) => {
+        lines.map(async ({ lineRows, ...lineData }: any) => {
           const line = await db.line.create({
             data: {
               ...lineData,
@@ -39,7 +38,7 @@ export default async function createPlay({
           });
 
           return Promise.all(
-            lineRows.map(async (lineRow) => {
+            lineRows.map(async (lineRow: any) => {
               return db.lineRow.create({
                 data: {
                   ...lineRow,

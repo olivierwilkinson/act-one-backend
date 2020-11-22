@@ -1,10 +1,15 @@
-import { schema } from 'nexus';
-import { intArg } from 'nexus/components/schema';
+import {
+  objectType,
+  extendType,
+  inputObjectType,
+  intArg,
+  arg,
+} from '@nexus/schema';
 
 import createPlay from '../helpers/createPlay';
 import userIsAdmin from '../helpers/userIsAdmin';
 
-schema.objectType({
+export const Play = objectType({
   name: 'Play',
   definition(t) {
     t.model.id();
@@ -17,7 +22,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const PlayQueries = extendType({
   type: 'Query',
   definition(t) {
     t.crud.play();
@@ -25,13 +30,13 @@ schema.extendType({
   },
 });
 
-schema.extendType({
+export const PlayMutations = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('createPlay', {
       type: 'Play',
       args: {
-        play: schema.arg({
+        play: arg({
           type: 'PlayData',
           required: true,
         }),
@@ -63,7 +68,7 @@ schema.extendType({
   },
 });
 
-schema.inputObjectType({
+export const PlayData = inputObjectType({
   name: 'PlayData',
   definition(t) {
     t.string('title', { required: true });
@@ -78,7 +83,7 @@ schema.inputObjectType({
   },
 });
 
-schema.inputObjectType({
+export const SceneData = inputObjectType({
   name: 'SceneData',
   definition(t) {
     t.int('actNum', { required: true });
@@ -90,7 +95,7 @@ schema.inputObjectType({
   },
 });
 
-schema.inputObjectType({
+export const LineData = inputObjectType({
   name: 'LineData',
   definition(t) {
     t.string('player', { required: true });
@@ -101,7 +106,7 @@ schema.inputObjectType({
   },
 });
 
-schema.inputObjectType({
+export const LineRowData = inputObjectType({
   name: 'LineRowData',
   definition(t) {
     t.string('text', { required: true });

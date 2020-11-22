@@ -1,6 +1,6 @@
-import { schema } from 'nexus';
+import { objectType, extendType } from '@nexus/schema';
 
-schema.objectType({
+export const User = objectType({
   name: 'User',
   definition(t) {
     t.id('id');
@@ -12,7 +12,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const UserQueries = extendType({
   type: 'Query',
   definition(t) {
     t.field('user', {
