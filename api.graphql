@@ -59,7 +59,6 @@ type Play {
   image: String!
   imageLicenseCode: String!
   imageLicenseUrl: String!
-  publishedDate: DateTime!
   scenes(after: SceneWhereUniqueInput, before: SceneWhereUniqueInput, first: Int, last: Int): [Scene!]!
   title: String!
 }

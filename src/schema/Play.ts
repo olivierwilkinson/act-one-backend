@@ -14,7 +14,6 @@ schema.objectType({
     t.model.imageLicenseCode();
     t.model.imageLicenseUrl();
     t.model.scenes();
-    t.model.publishedDate();
   },
 });
 

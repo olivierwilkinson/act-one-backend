@@ -29,7 +29,6 @@ model User {
 model Play {
   id               Int      @id @default(autoincrement())
   title            String
-  publishedDate    DateTime
   description      String
   image            String
   imageLicenseUrl  String
