@@ -1,6 +1,6 @@
-import { schema } from 'nexus';
+import { objectType, extendType } from '@nexus/schema';
 
-schema.objectType({
+export const Line = objectType({
   name: 'Line',
   definition(t) {
     t.model.id();
@@ -11,7 +11,7 @@ schema.objectType({
   },
 });
 
-schema.extendType({
+export const LineQueries = extendType({
   type: 'Query',
   definition(t) {
     t.crud.line();

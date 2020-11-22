@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PrismaClient } from 'nexus-plugin-prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import statusRouter from './status';

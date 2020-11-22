@@ -1,9 +1,9 @@
 /* eslint no-console: 0 */
 
 import { Router } from 'express';
-import { PrismaClient } from 'nexus-plugin-prisma/client';
-import ApplicationError from '../errors/ApplicationError';
-import { version } from '../../package.json';
+import { PrismaClient } from '@prisma/client';
+import ApplicationError from '../../errors/ApplicationError';
+import { version } from '../../../package.json';
 
 export default (client: PrismaClient) => {
   const router = Router();
