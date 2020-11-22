@@ -77,8 +77,10 @@ input PlayWhereUniqueInput {
 }
 
 type Query {
-  getPlays: [Play!]
+  line(where: LineWhereUniqueInput!): Line
+  lineRow(where: LineRowWhereUniqueInput!): LineRow
   play(where: PlayWhereUniqueInput!): Play
+  plays(after: PlayWhereUniqueInput, before: PlayWhereUniqueInput, first: Int, last: Int): [Play!]!
   scene(where: SceneWhereUniqueInput!): Scene
   user: User
 }

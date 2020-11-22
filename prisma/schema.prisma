@@ -27,13 +27,13 @@ model User {
 }
 
 model Play {
-  id               Int     @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   title            String
   description      String
   image            String
   imageLicenseUrl  String
   imageLicenseCode String
-  scenes           Scene[] @relation
+  scenes           Scene[]  @relation
 }
 
 model Scene {

@@ -10,3 +10,10 @@ schema.objectType({
     t.model.lineId();
   },
 });
+
+schema.extendType({
+  type: 'Query',
+  definition(t) {
+    t.crud.lineRow();
+  },
+});
