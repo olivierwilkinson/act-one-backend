@@ -13,7 +13,8 @@
     "start": "node dist",
     "test": "jest",
     "fix-lint": "prettier --write src && ./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
-    "migrate": "./scripts/migrate.sh",
+    "migrate-up": "prisma migrate up --experimental",
+    "migrate-save": "prisma migrate save --experimental",
     "generate": "prisma generate"
   },
   "dependencies": {
