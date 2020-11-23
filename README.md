@@ -1,5 +1,17 @@
 # ActOne Backend
 
+## Setting up SQL
+
+### Session store
+
+The prisma-session-store library requires the Session table to have a data 
+column of type String. String is mapped to VarChar(191) by Prisma, this is not
+long enough for the data column of the Session model. Update the Session.data
+column to be able to handle long strings:
+```
+ALTER TABLE Session MODIFY data LONGTEXT;
+```
+
 ## Migrating SQL
 
 ### Locally
