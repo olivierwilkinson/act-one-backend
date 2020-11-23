@@ -5,7 +5,9 @@
 ### Locally
 
 ```
-npm run migrate:local
+docker-compose up -d
+npm run migrate
+docker-compose down
 ```
 
 ### Production
@@ -17,13 +19,6 @@ Expose production db locally
 GOOGLE_APPLICATION_CREDENTIALS=/Users/olivier/Developer/GoogleCloud/{actone_service_account.json} \
     ~/Developer/GoogleCloud/cloud_sql_proxy \
     -instances=actone:europe-west2:{sql-instance-name}=tcp:3305
-```
-
-Start server with migrations and point to production db
-
-```
-DATABASE_URL=mysql://{user}:{pass}@localhost:3305/actone \
-    npm run dev
 ```
 
 Run migrate script with DATABASE_URL updated for production sql user creds
