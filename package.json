@@ -18,7 +18,8 @@
     "migrate-save": "prisma migrate save --experimental",
     "generate": "npm run generate:prisma && npm run generate:nexus",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema"
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only src/schema",
+    "tunnel": "cloudflared tunnel --url http://localhost:8000"
   },
   "dependencies": {
     "@nexus/schema": "^0.18.0",
