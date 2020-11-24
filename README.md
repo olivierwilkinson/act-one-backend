@@ -1,11 +1,25 @@
 # ActOne Backend
 
+## Setting up SQL
+
+### Session store
+
+The prisma-session-store library requires the Session table to have a data 
+column of type String. String is mapped to VarChar(191) by Prisma, this is not
+long enough for the data column of the Session model. Update the Session.data
+column to be able to handle long strings:
+```
+ALTER TABLE Session MODIFY data LONGTEXT;
+```
+
 ## Migrating SQL
 
 ### Locally
 
 ```
-npm run migrate:local
+docker-compose up -d
+npm run migrate
+docker-compose down
 ```
 
 ### Production
@@ -17,13 +31,6 @@ Expose production db locally
 GOOGLE_APPLICATION_CREDENTIALS=/Users/olivier/Developer/GoogleCloud/{actone_service_account.json} \
     ~/Developer/GoogleCloud/cloud_sql_proxy \
     -instances=actone:europe-west2:{sql-instance-name}=tcp:3305
-```
-
-Start server with migrations and point to production db
-
-```
-DATABASE_URL=mysql://{user}:{pass}@localhost:3305/actone \
-    npm run dev
 ```
 
 Run migrate script with DATABASE_URL updated for production sql user creds
