@@ -19,6 +19,7 @@ export default makeSchema({
   plugins: [
     nexusPrisma({
       experimentalCRUD: true,
+      prismaClient: (ctx) => ctx.db,
     }),
   ],
   outputs: {
@@ -32,7 +33,7 @@ export default makeSchema({
     sources: [
       {
         source: '.prisma/client',
-        alias: 'prisma',
+        alias: 'db',
       },
       {
         source: require.resolve('../apollo/context'),
