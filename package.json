@@ -6,7 +6,6 @@
   "main": "dist/index.js",
   "scripts": {
     "eslint": "eslint src/server.ts",
-    "postinstall": "chmod +x ./scripts/dev.sh",
     "build": "nexus build",
     "lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
     "dev": "NODE_ENV=development nodemon",
