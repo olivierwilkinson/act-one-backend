@@ -5,6 +5,8 @@ import passport from 'passport';
 import strongErrorHandler from 'strong-error-handler';
 import * as Sentry from '@sentry/node';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
+import expressWinston from 'express-winston';
+import winston from 'winston';
 
 import client from '../prisma/client';
 import routes from './routes';
@@ -14,9 +16,15 @@ import {
   createLocalSignupStrategy,
 } from './passport';
 
+// whitelist body for logging
+expressWinston.requestWhitelist.push('body');
+expressWinston.responseWhitelist.push('body');
+
 Sentry.init({ dsn: process.env.SENTRY_DSN || '' });
 
 const app = express();
+
+// setup session middleware
 app.use(
   session({
     secret: process.env.SESSION_SECRET || '123',
@@ -33,10 +41,14 @@ app.use(
   })
 );
 
+// setup sentry
 app.use(Sentry.Handlers.requestHandler());
+
+// setup body parser
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
+// setup passport
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(createGoogleStrategy(client));
@@ -47,6 +59,36 @@ passport.serializeUser((user, done) =>
 );
 passport.deserializeUser((user, done) =>
   process.nextTick(() => done(null, user))
+);
+
+// setup winston logging
+app.use(
+  expressWinston.logger({
+    transports: [new winston.transports.Console()],
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.json()
+    ),
+    colorize: true,
+    requestFilter: (req, propName) => {
+      if (propName === 'body') {
+        if (req.url.includes('/login')) {
+          return {
+            ...req.body,
+            password: '****',
+          };
+        }
+        if (req.url.includes('/signup')) {
+          return {
+            ...req.body,
+            password: '****',
+          };
+        }
+      }
+
+      return req[propName];
+    },
+  })
 );
 
 app.use(routes(client));
