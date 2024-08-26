@@ -1,8 +1,17 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import passport from 'passport';
+
+function handleEmailSignIn(req: Request<any>, res: Response<any>) {
+  if (!req.user) return res.sendStatus(401);
+  res.header('Set-Cookie', req.headers.cookie);
+  return res.json(req.user);
+}
 
 export default () => {
   const router = Router();
+
+  router.post('/signup', passport.authenticate('signup'), handleEmailSignIn);
+  router.post('/login', passport.authenticate('login'), handleEmailSignIn);
 
   router.get(
     '/google',

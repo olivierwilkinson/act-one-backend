@@ -22,10 +22,12 @@ export default (client: PrismaClient) =>
         return;
       }
 
+      const normalisedEmail = email.toLowerCase();
+
       client.user
         .upsert({
           create: {
-            email,
+            email: normalisedEmail,
             name,
             googleId,
             picture,
@@ -36,7 +38,7 @@ export default (client: PrismaClient) =>
             name,
           },
           where: {
-            email,
+            email: normalisedEmail,
           },
         })
         .then((user) => done(undefined, user))

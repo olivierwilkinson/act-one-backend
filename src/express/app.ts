@@ -8,7 +8,11 @@ import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 
 import client from '../prisma/client';
 import routes from './routes';
-import { createGoogleStrategy } from './passport';
+import {
+  createGoogleStrategy,
+  createLocalLoginStrategy,
+  createLocalSignupStrategy,
+} from './passport';
 
 Sentry.init({ dsn: process.env.SENTRY_DSN || '' });
 
@@ -36,8 +40,14 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(createGoogleStrategy(client));
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((user, done) => done(null, user));
+passport.use('login', createLocalLoginStrategy(client));
+passport.use('signup', createLocalSignupStrategy(client));
+passport.serializeUser((user, done) =>
+  process.nextTick(() => done(null, user))
+);
+passport.deserializeUser((user, done) =>
+  process.nextTick(() => done(null, user))
+);
 
 app.use(routes(client));
 
