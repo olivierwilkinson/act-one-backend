@@ -8,6 +8,7 @@ export const LineRow = objectType({
     t.model.text();
     t.model.line();
     t.model.lineId();
+    t.model.index();
   },
 });
 
