@@ -1,60 +1,38 @@
 import { PrismaClient } from '@prisma/client';
+import type { NexusGenInputs } from '../types/nexus-typegen';
 
 export default async function createPlay({
   play: { scenes, ...playData },
   db,
 }: {
-  play: any;
+  play: NexusGenInputs['PlayData'];
   db: PrismaClient;
 }) {
+  console.log('creating play:', playData);
   const play = await db.play.create({
-    data: playData,
-  });
-
-  await Promise.all(
-    (scenes || []).map(async ({ lines, ...sceneData }: any) => {
-      const scene = await db.scene.create({
-        data: {
+    data: {
+      ...playData,
+      scenes: {
+        create: scenes.map(({ lines, ...sceneData }, sceneIndex) => ({
           ...sceneData,
-          play: {
-            connect: {
-              id: play.id,
-            },
-          },
-        },
-      });
-
-      return Promise.all(
-        lines.map(async ({ lineRows, ...lineData }: any) => {
-          const line = await db.line.create({
-            data: {
+          index: sceneIndex,
+          lines: {
+            create: lines.map(({ lineRows, ...lineData }, lineIndex) => ({
               ...lineData,
-              scene: {
-                connect: {
-                  id: scene.id,
-                },
-              },
-            },
-          });
-
-          return Promise.all(
-            lineRows.map(async (lineRow: any) => {
-              return db.lineRow.create({
-                data: {
+              index: lineIndex,
+              lineRows: {
+                create: lineRows.map((lineRow, lineRowIndex) => ({
                   ...lineRow,
-                  line: {
-                    connect: {
-                      id: line.id,
-                    },
-                  },
-                },
-              });
-            })
-          );
-        })
-      );
-    })
-  );
+                  index: lineRowIndex,
+                })),
+              },
+            })),
+          },
+        })),
+      },
+    },
+  });
+  console.log('Created play:', play);
 
   return play;
 }

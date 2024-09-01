@@ -9,6 +9,7 @@ export const Scene = objectType({
     t.model.playId();
     t.model.play();
     t.model.lines();
+    t.model.index();
   },
 });
 

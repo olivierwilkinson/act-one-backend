@@ -8,6 +8,7 @@ export const Line = objectType({
     t.model.scene();
     t.model.sceneId();
     t.model.lineRows();
+    t.model.index();
   },
 });
 
